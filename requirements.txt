@@ -1,0 +1,14 @@
+pandas
+numpy
+plotly
+streamlit
+scikit-learn
+nltk
+spacy
+textblob
+vaderSentiment
+langdetect
+openpyxl
+scipy
+networkx
+statsmodels

@@ -1,0 +1,57 @@
+\n--- PASO 0 QA: 2026-02-24 14:18:09 ---\n[OK] pandas imported successfully.\n[OK] numpy imported successfully.\n[OK] plotly imported successfully.\n[OK] streamlit imported successfully.\n[OK] sklearn imported successfully.\n[OK] nltk imported successfully.\n[OK] spacy imported successfully.\n[OK] textblob imported successfully.\n[OK] vaderSentiment imported successfully.\n[OK] langdetect imported successfully.\n[OK] openpyxl imported successfully.\n[OK] scipy imported successfully.\n[OK] networkx imported successfully.\n[OK] sqlite3 imported successfully.\n[OK] spacy en_core_web_sm model loaded successfully.\n[2026-02-24 14:32:09] \n--- PASO 1 QA: NLP PIPELINE START ---\n[2026-02-24 14:32:11] Attempting to load data/Reviews.csv with pandas...\n[2026-02-24 14:32:15] Successfully loaded CSV.\n[2026-02-24 14:32:16] Sampled 50000 rows. Shape: (50000, 10)\n[2026-02-24 14:32:16] Data types:\nId                         int64
+ProductId                 object
+UserId                    object
+ProfileName               object
+HelpfulnessNumerator       int64
+HelpfulnessDenominator     int64
+Score                      int64
+Time                       int64
+Summary                   object
+Text                      object
+dtype: object\n[2026-02-24 14:32:16] Score distribution:\nScore
+5    32097
+4     7008
+1     4528
+3     3791
+2     2576
+Name: count, dtype: int64\n[2026-02-24 14:32:16] Detecting language on a sample to verify (taking top 1000 to save time)...\n[2026-02-24 14:36:49] Cleaning text...\n[2026-02-24 14:44:22] Running sentiment analysis...\n[2026-02-24 14:45:12] \n--- PASO 1 QA: NLP PIPELINE START ---\n[2026-02-24 14:45:13] Attempting to load data/Reviews.csv with pandas...\n[2026-02-24 14:45:17] Successfully loaded CSV.\n[2026-02-24 14:45:17] Sampled 50000 rows. Shape: (50000, 10)\n[2026-02-24 14:45:17] Data types:\nId                         int64
+ProductId                 object
+UserId                    object
+ProfileName               object
+HelpfulnessNumerator       int64
+HelpfulnessDenominator     int64
+Score                      int64
+Time                       int64
+Summary                   object
+Text                      object
+dtype: object\n[2026-02-24 14:45:17] Score distribution:\nScore
+5    32097
+4     7008
+1     4528
+3     3791
+2     2576
+Name: count, dtype: int64\n[2026-02-24 14:45:17] Detecting language on a sample to verify (taking top 1000 to save time)...\n[2026-02-24 14:49:53] Cleaning text (regex)...\n[2026-02-24 14:49:54] Cleaning text (spacy batch)...\n[2026-02-24 14:55:46] Running sentiment analysis...\n[2026-02-24 14:57:16] Sentiment distribution:\nSentiment_Class
+Positive    88.850
+Negative     8.736
+Neutral      2.414
+Name: proportion, dtype: float64\n[2026-02-24 14:57:16] Correlation between Rating (Score) and Sentiment Score: 0.555\n[2026-02-24 14:57:16] Running Topic Modeling on negative reviews...\n[2026-02-24 14:57:16] Extracting keywords by sentiment...\n[2026-02-24 14:57:19] Saved top keywords to output/topic_keywords.csv\n[2026-02-24 14:57:19] Saved cleaned dataset to output/sentiment_clean.csv. Shape: (50000, 11)\n[2026-02-24 14:57:19] --- PASO 1 QA: SUCCESS ---\n[2026-02-24 17:26:10] \n--- PASO 1 QA: NLP PIPELINE START ---\n[2026-02-24 17:26:11] Attempting to load data/Reviews.csv with pandas...\n[2026-02-24 17:26:15] Successfully loaded CSV.\n[2026-02-24 17:26:16] Sampled 50000 rows. Shape: (50000, 10)\n[2026-02-24 17:26:16] Data types:\nId                         int64
+ProductId                 object
+UserId                    object
+ProfileName               object
+HelpfulnessNumerator       int64
+HelpfulnessDenominator     int64
+Score                      int64
+Time                       int64
+Summary                   object
+Text                      object
+dtype: object\n[2026-02-24 17:26:16] Score distribution:\nScore
+5    32097
+4     7008
+1     4528
+3     3791
+2     2576
+Name: count, dtype: int64\n[2026-02-24 17:26:16] Detecting language on a sample to verify (taking top 1000 to save time)...\n[2026-02-24 17:26:22] Cleaning text (regex)...\n[2026-02-24 17:26:23] Cleaning text (spacy batch)...\n[2026-02-24 17:32:19] Running sentiment analysis...\n[2026-02-24 17:33:51] Sentiment distribution:\nSentiment_Class
+Positive    88.850
+Negative     8.736
+Neutral      2.414
+Name: proportion, dtype: float64\n[2026-02-24 17:33:51] Correlation between Rating (Score) and Sentiment Score: 0.555\n[2026-02-24 17:33:51] Running Topic Modeling on negative reviews...\n[2026-02-24 17:33:51] Extracting keywords by sentiment...\n[2026-02-24 17:33:54] Saved top keywords to output/topic_keywords.csv\n[2026-02-24 17:33:54] Saved cleaned dataset to output/sentiment_clean.csv. Shape: (50000, 11)\n[2026-02-24 17:33:54] --- PASO 1 QA: SUCCESS ---\n[2026-02-24 17:34:12] \n--- PASO 2 QA: MARKETING DATA START ---\n[2026-02-24 17:34:13] Generated 96 marketing records.\n[2026-02-24 17:34:13] --- PASO 2 QA: SUCCESS ---\n
