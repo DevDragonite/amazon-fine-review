@@ -288,15 +288,15 @@ def main():
 
 <div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
 <h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t("intro_card1_title")}</h4>
-<p style="margin:0; color: {COLORS['text_muted']};">Análisis avanzado con VADER y TextBlob para captar sutilezas con precisión lingüística.</p>
+<p style="margin:0; color: {COLORS['text_muted']};">{t("intro_card1_desc")}</p>
 </div>
 <div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
 <h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t("intro_card2_title")}</h4>
-<p style="margin:0; color: {COLORS['text_muted']};">Atribución precisa a través de múltiples canales digitales para maximizar la inversión.</p>
+<p style="margin:0; color: {COLORS['text_muted']};">{t("intro_card2_desc")}</p>
 </div>
 <div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
 <h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t("intro_card3_title")}</h4>
-<p style="margin:0; color: {COLORS['text_muted']};">Modelos predictivos que vinculan la voz del cliente directamente con el ROI financiero.</p>
+<p style="margin:0; color: {COLORS['text_muted']};">{t("intro_card3_desc")}</p>
 </div>
 
 <div style="text-align: center; margin-top: 2rem; font-family: 'Inter', sans-serif;">
@@ -375,9 +375,9 @@ def main():
                 dist.columns = ['Sentiment', 'Count']
                 fig1 = px.pie(dist, values='Count', names='Sentiment', hole=0.7, 
                               color='Sentiment', color_discrete_map={'Positive': COLORS['positive'], 'Neutral': COLORS['neutral'], 'Negative': COLORS['negative']})
-                fig1.update_layout(PLOTLY_TEMPLATE['layout'], title="Distribución de Sentimiento")
+                fig1.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart1_title"))
                 st.plotly_chart(fig1, use_container_width=True)
-                st.info(f"**{t('insight_label')}**: La mayoría de reseñas se inclinan hacia lo {'positivo' if avg_sent>0 else 'negativo'}.")
+                st.info(f"**{t('insight_label')}**: {t('insight1_pos') if avg_sent>0 else t('insight1_neg')}")
                 
             with t1c2:
                 # Line Chart Área Sombreada
@@ -389,7 +389,7 @@ def main():
                         fig2.add_trace(go.Scatter(x=time_sent['Month'], y=time_sent[col], name=col,
                                                   fill='tozeroy', fillcolor=color.replace(')', ', 0.15)').replace('rgb', 'rgba'),
                                                   line=dict(color=color)))
-                fig2.update_layout(PLOTLY_TEMPLATE['layout'], title="Evolución Temporal del Sentimiento")
+                fig2.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart2_title"))
                 st.plotly_chart(fig2, use_container_width=True)
             
             # Heatmap / Top Keywords
@@ -400,10 +400,10 @@ def main():
                     df_freq = df_neg_topics.sort_values(by='Count', ascending=True) # Sort for Plotly horizontal bar
                     fig3 = px.bar(df_freq, x='Count', y='Topic', orientation='h', 
                                   color_discrete_sequence=[COLORS['negative']])
-                    fig3.update_layout(PLOTLY_TEMPLATE['layout'], title="Distribución de Quejas / Temas Negativos")
+                    fig3.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart3_title"))
                     st.plotly_chart(fig3, use_container_width=True)
                 else:
-                    st.info("Sin datos suficientes para extraer keywords.")
+                    st.info(t("no_data_keywords"))
                 
             with t1c4:
                 # Heatmap Categoría vs Mes
@@ -414,7 +414,7 @@ def main():
                     y=heat_data['Category'],
                     colorscale=[[0, COLORS['negative']], [0.5, COLORS['neutral']], [1, COLORS['positive']]]
                 ))
-                fig4.update_layout(PLOTLY_TEMPLATE['layout'], title="Heatmap: Sentimiento por Categoría y Mes")
+                fig4.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart4_title"))
                 st.plotly_chart(fig4, use_container_width=True)
                 
             st.markdown("</div>", unsafe_allow_html=True)
@@ -428,18 +428,18 @@ def main():
                 roas_canal = f_mkt.groupby('Canal')['ROAS'].mean().reset_index()
                 fig5 = px.bar(roas_canal, x='Canal', y='ROAS', color='Canal')
                 fig5.add_hline(y=3.0, line_dash="solid", line_color=COLORS['secondary'], annotation_text=t('benchmark_label'))
-                fig5.update_layout(PLOTLY_TEMPLATE['layout'], title="ROAS Promedio por Canal")
+                fig5.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart5_title"))
                 st.plotly_chart(fig5, use_container_width=True)
-                st.info(f"**{t('insight_label')}**: Email Marketing suele tener el mayor ROAS frente a redes sociales.")
+                st.info(f"**{t('insight_label')}**: {t('insight2')}")
 
             with t2c2:
                 fig6 = px.scatter(f_mkt, x='CAC', y='Conversiones', size='Inversion', color='Canal', hover_name='Month')
-                fig6.update_layout(PLOTLY_TEMPLATE['layout'], title="Eficiencia: CAC vs Conversiones")
+                fig6.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart6_title"))
                 st.plotly_chart(fig6, use_container_width=True)
                 
-            fig7 = px.area(f_mkt, x='Month', y='Inversion', color='Canal', title="Inversión Mensual por Canal")
+            fig7 = px.area(f_mkt, x='Month', y='Inversion', color='Canal', title=t("chart7_title"))
             rev_total = f_mkt.groupby('Month')['Revenue'].sum().reset_index()
-            fig7.add_trace(go.Scatter(x=rev_total['Month'], y=rev_total['Revenue'], name='Total Revenue', line=dict(color=COLORS['primary'], width=3)))
+            fig7.add_trace(go.Scatter(x=rev_total['Month'], y=rev_total['Revenue'], name=t('total_revenue'), line=dict(color=COLORS['primary'], width=3)))
             fig7.update_layout(PLOTLY_TEMPLATE['layout'])
             st.plotly_chart(fig7, use_container_width=True)
             
@@ -465,16 +465,16 @@ def main():
             if len(merged) > 2:
                 fig8 = px.scatter(merged, x='Sentiment_Score', y='ROAS', trendline="ols")
                 fig8.update_traces(marker=dict(size=12, color=COLORS['secondary']))
-                fig8.update_layout(PLOTLY_TEMPLATE['layout'], title="Correlación (Lag 1 Mes): Sentimiento vs ROAS")
+                fig8.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart8_title"))
                 # Get R2
                 results = px.get_trendline_results(fig8)
                 r2 = results.iloc[0]["px_fit_results"].rsquared
                 fig8.add_annotation(x=merged['Sentiment_Score'].mean(), y=merged['ROAS'].max(), text=f"R² = {r2:.2f} — {t('correlation_note')}", showarrow=False, font=dict(color=COLORS['primary']))
                 st.plotly_chart(fig8, use_container_width=True)
                 
-                st.markdown(f"<div class='aurora-card' style='text-align: center; border-color: {COLORS['primary']}'><h3 style='color: {COLORS['primary']}'>Un incremento de 0.1 en score de sentimiento correlaciona con +8.3% en ROAS el mes siguiente (p-value < 0.01)</h3></div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='aurora-card' style='text-align: center; border-color: {COLORS['primary']}'><h3 style='color: {COLORS['primary']}'>{t('insight3')}</h3></div>", unsafe_allow_html=True)
             else:
-                st.warning("No hay suficientes datos superpuestos para mostrar la correlación.")
+                st.warning(t("no_data_correlation"))
                 
             st.markdown("</div>", unsafe_allow_html=True)
 
@@ -496,28 +496,28 @@ def main():
                 """, unsafe_allow_html=True)
                 
             create_insight(
-                "Facebook Ads concentra el 40% de la inversión pero genera el ROAS más bajo (1.8x)",
-                "Pérdida estimada de capital en canales ineficientes",
-                "Redistribuir 20% del presupuesto a Google Ads",
-                "+35% en ROAS total proyectado"
+                t("c1_finding"),
+                t("c1_impact"),
+                t("c1_action"),
+                t("c1_prediction")
             )
             create_insight(
-                "Sentimiento negativo en reseñas precede caídas de conversión en 30-45 días",
-                "Caída en la rentabilidad de las campañas activas",
-                "Implementar alertas tempranas de sentimiento para pausar campañas",
-                "Reducción del 20% en CAC general"
+                t("c2_finding"),
+                t("c2_impact"),
+                t("c2_action"),
+                t("c2_prediction")
             )
             create_insight(
-                "Las keywords 'taste', 'flavor' y 'packaging' dominan las quejas",
-                "Principal driver de sentimiento negativo afectando el LTV (Life Time Value)",
-                "Feedback directo al equipo de producto sobre estas 3 áreas críticas",
-                "+0.3 puntos en score de sentimiento global"
+                t("c3_finding"),
+                t("c3_impact"),
+                t("c3_action"),
+                t("c3_prediction")
             )
             create_insight(
-                "Email Marketing tiene el CAC más bajo pero el menor volumen de inversión",
-                "Canal de retención subutilizado con mayor rentabilidad",
-                "Incrementar frecuencia y presupuesto de Email Marketing al 30%",
-                "+18% en conversiones totales impulsadas por recompra"
+                t("c4_finding"),
+                t("c4_impact"),
+                t("c4_action"),
+                t("c4_prediction")
             )
             
             st.markdown(f"<p style='margin-top: 2rem; font-style: italic; color: {COLORS['text_muted']}; font-size: 0.85rem;'>{t('methodology_note')}: {t('conclusions_intro')}</p>", unsafe_allow_html=True)
