@@ -5,3 +5,4 @@ statsmodels
 scipy
 openpyxl
 vaderSentiment
+matplotlib
