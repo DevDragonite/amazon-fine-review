@@ -1,34 +1,34 @@
 COLORS = {
-    # Fondos (Deep Space / Midnight Blue for a soothing Dark/Soft Mode)
-    "bg_gradient": "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-    "surface": "rgba(30, 41, 59, 0.7)", # Dark surface with blur
-    "surface_hover": "rgba(30, 41, 59, 0.9)",
+    # Fondos (Luz muy suave, "Pearl/Cloud" no escandila)
+    "bg_gradient": "linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)",
+    "surface": "rgba(255, 255, 255, 0.65)", # Translúcido mate
+    "surface_hover": "rgba(255, 255, 255, 0.9)",
 
-    # Acento principal — Teal (Serenidad, stands out on dark)
-    "primary": "#2dd4bf", # Brighter teal for contrast
-    "primary_soft": "rgba(45, 212, 191, 0.15)",
+    # Acento principal — Teal calmo (bosque/eucalipto suave)
+    "primary": "#0f766e",
+    "primary_soft": "rgba(15, 118, 110, 0.1)",
 
-    # Acento secundario — Indigo
-    "secondary": "#818cf8",
-    "secondary_soft": "rgba(129, 140, 248, 0.12)",
+    # Acento secundario — Slate (Pizarra)
+    "secondary": "#475569",
+    "secondary_soft": "rgba(71, 85, 105, 0.1)",
 
-    # Acento terciario — Slate Blue
-    "accent": "#38bdf8",
-    "accent_soft": "rgba(56, 189, 248, 0.15)",
+    # Acento terciario — Indigo apagado
+    "accent": "#4f46e5",
+    "accent_soft": "rgba(79, 70, 229, 0.1)",
 
-    # Semáforo analítico
-    "positive": "#34d399", # Emerald light
-    "neutral": "#fbbf24",  # Amber light
-    "negative": "#f87171", # Red light
+    # Semáforo analítico (Tonos pastel mate legibles)
+    "positive": "#059669", # Emerald suave
+    "neutral": "#d97706",  # Amber oscuro
+    "negative": "#dc2626", # Red oscuro
 
     # Texto
-    "text_primary": "#f8fafc", # Very light slate for readability
-    "text_muted": "#cbd5e1",
-    "text_accent": "#2dd4bf",
+    "text_primary": "#1e293b", # Gris oscuro (nunca negro puro)
+    "text_muted": "#64748b",
+    "text_accent": "#0f766e",
 
     # Bordes
-    "border": "rgba(255, 255, 255, 0.1)",
-    "border_strong": "rgba(255, 255, 255, 0.2)",
+    "border": "rgba(148, 163, 184, 0.2)",
+    "border_strong": "rgba(148, 163, 184, 0.4)",
 }
 
 PLOTLY_TEMPLATE = {
@@ -37,20 +37,20 @@ PLOTLY_TEMPLATE = {
         "plot_bgcolor": "rgba(0,0,0,0)",
         "font": {
             "family": "Inter",
-            "color": "#f8fafc",
+            "color": "#1e293b",
             "size": 12
         },
         "colorway": [
-            "#2dd4bf", "#818cf8", "#38bdf8",
-            "#34d399", "#fbbf24", "#f87171", "#c084fc"
+            "#0f766e", "#475569", "#4f46e5",
+            "#059669", "#d97706", "#dc2626", "#8b5cf6"
         ],
         "xaxis": {
-            "gridcolor": "rgba(255, 255, 255, 0.05)",
-            "linecolor": "rgba(255, 255, 255, 0.1)"
+            "gridcolor": "rgba(30, 41, 59, 0.05)",
+            "linecolor": "rgba(30, 41, 59, 0.1)"
         },
         "yaxis": {
-            "gridcolor": "rgba(255, 255, 255, 0.05)",
-            "linecolor": "rgba(255, 255, 255, 0.1)"
+            "gridcolor": "rgba(30, 41, 59, 0.05)",
+            "linecolor": "rgba(30, 41, 59, 0.1)"
         }
     }
 }

@@ -270,9 +270,9 @@ def main():
     if df_sent is None:
         return
         
-    min_year = df_sent['Date'].dt.year.min()
-    max_year = df_sent['Date'].dt.year.max()
-    year_range = st.sidebar.slider(t("filter_year"), min_value=int(min_year), max_value=int(max_year), value=(int(min_year), int(max_year)))
+    min_year = int(df_sent['Date'].dt.year.min()) # type: ignore
+    max_year = int(df_sent['Date'].dt.year.max()) # type: ignore
+    year_range = st.sidebar.slider(t("filter_year"), min_value=min_year, max_value=max_year, value=(min_year, max_year))
     
     sentiment_range = st.sidebar.slider(t("filter_sentiment"), -1.0, 1.0, (-1.0, 1.0))
     
@@ -346,10 +346,10 @@ def main():
         # KPIs
         col1, col2, col3, col4 = st.columns(4)
         
-        avg_sent = f_sent['Sentiment_Score'].mean()
-        avg_roas = f_mkt['ROAS'].mean()
-        neg_pct = (f_sent['Sentiment_Class'] == 'Negative').mean() * 100
-        avg_cac = f_mkt['CAC'].mean()
+        avg_sent = float(f_sent['Sentiment_Score'].mean()) # type: ignore
+        avg_roas = float(f_mkt['ROAS'].mean()) # type: ignore
+        neg_pct = float((f_sent['Sentiment_Class'] == 'Negative').astype(float).mean() * 100) # type: ignore
+        avg_cac = float(f_mkt['CAC'].mean()) # type: ignore
         
         with col1:
             st.metric(t("kpi_sentiment"), f"{avg_sent:.2f}")
@@ -396,7 +396,7 @@ def main():
             t1c3, t1c4 = st.columns(2)
             with t1c3:
                 # Bar Chart Horizontal Keywords - Usando DF preprocesado para evitar KeyError's de memoria
-                if df_neg_topics is not None and not df_neg_topics.empty:
+                if df_neg_topics is not None and len(df_neg_topics) > 0: # type: ignore
                     df_freq = df_neg_topics.sort_values(by='Count', ascending=True) # Sort for Plotly horizontal bar
                     fig3 = px.bar(df_freq, x='Count', y='Topic', orientation='h', 
                                   color_discrete_sequence=[COLORS['negative']])
