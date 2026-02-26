@@ -320,8 +320,25 @@ def main():
         
     elif nav_selection == "dashboard":
         
-        st.title(t("dashboard_title"))
-        st.write("")
+        # Banner Principal del Dashboard
+        st.markdown(f"""
+        <div style="
+            background: {COLORS['surface']};
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid {COLORS['border_strong']};
+            box-shadow: 0 8px 32px rgba(84, 106, 118, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-top: 4px solid {COLORS['primary']};
+        ">
+            <h1 style="color: {COLORS['primary']}; margin: 0; font-size: 2.2rem; font-weight: 700;">
+                {t('dashboard_title')}
+            </h1>
+        </div>
+        """, unsafe_allow_html=True)
         
         # MAIN UI FILTERS
         st.markdown(f"<h4 style='color: {COLORS['text_primary']}; margin-bottom: 1rem;'>🎛️ Filtros Globales</h4>", unsafe_allow_html=True)
