@@ -1,34 +1,34 @@
 COLORS = {
-    # Fondos (Teal a Slate muy claro para Light Mode)
-    "bg_gradient": "linear-gradient(135deg, #f0fdfa 0%, #f8fafc 100%)",
-    "surface": "rgba(255, 255, 255, 0.8)",
-    "surface_hover": "rgba(255, 255, 255, 0.95)",
+    # Fondos (Deep Space / Midnight Blue for a soothing Dark/Soft Mode)
+    "bg_gradient": "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+    "surface": "rgba(30, 41, 59, 0.7)", # Dark surface with blur
+    "surface_hover": "rgba(30, 41, 59, 0.9)",
 
-    # Acento principal — Teal (Serenidad)
-    "primary": "#0d9488",
-    "primary_soft": "rgba(13, 148, 136, 0.15)",
+    # Acento principal — Teal (Serenidad, stands out on dark)
+    "primary": "#2dd4bf", # Brighter teal for contrast
+    "primary_soft": "rgba(45, 212, 191, 0.15)",
 
-    # Acento secundario — Slate
-    "secondary": "#475569",
-    "secondary_soft": "rgba(71, 85, 105, 0.12)",
+    # Acento secundario — Indigo
+    "secondary": "#818cf8",
+    "secondary_soft": "rgba(129, 140, 248, 0.12)",
 
-    # Acento terciario — Indigo pálido (para equilibrio)
-    "accent": "#6366f1",
-    "accent_soft": "rgba(99, 102, 241, 0.15)",
+    # Acento terciario — Slate Blue
+    "accent": "#38bdf8",
+    "accent_soft": "rgba(56, 189, 248, 0.15)",
 
     # Semáforo analítico
-    "positive": "#10b981", # Emerald
-    "neutral": "#f59e0b",  # Amber
-    "negative": "#ef4444", # Red
+    "positive": "#34d399", # Emerald light
+    "neutral": "#fbbf24",  # Amber light
+    "negative": "#f87171", # Red light
 
     # Texto
-    "text_primary": "#0f172a", # Slate oscuro
-    "text_muted": "#64748b",
-    "text_accent": "#0d9488",
+    "text_primary": "#f8fafc", # Very light slate for readability
+    "text_muted": "#cbd5e1",
+    "text_accent": "#2dd4bf",
 
     # Bordes
-    "border": "rgba(13, 148, 136, 0.2)",
-    "border_strong": "rgba(13, 148, 136, 0.4)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "border_strong": "rgba(255, 255, 255, 0.2)",
 }
 
 PLOTLY_TEMPLATE = {
@@ -37,20 +37,20 @@ PLOTLY_TEMPLATE = {
         "plot_bgcolor": "rgba(0,0,0,0)",
         "font": {
             "family": "Inter",
-            "color": "#0f172a",
+            "color": "#f8fafc",
             "size": 12
         },
         "colorway": [
-            "#0d9488", "#475569", "#6366f1",
-            "#10b981", "#f59e0b", "#ef4444", "#38bdf8"
+            "#2dd4bf", "#818cf8", "#38bdf8",
+            "#34d399", "#fbbf24", "#f87171", "#c084fc"
         ],
         "xaxis": {
-            "gridcolor": "rgba(15, 23, 42, 0.05)",
-            "linecolor": "rgba(15, 23, 42, 0.1)"
+            "gridcolor": "rgba(255, 255, 255, 0.05)",
+            "linecolor": "rgba(255, 255, 255, 0.1)"
         },
         "yaxis": {
-            "gridcolor": "rgba(15, 23, 42, 0.05)",
-            "linecolor": "rgba(15, 23, 42, 0.1)"
+            "gridcolor": "rgba(255, 255, 255, 0.05)",
+            "linecolor": "rgba(255, 255, 255, 0.1)"
         }
     }
 }

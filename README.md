@@ -12,7 +12,7 @@
 <div align="center">
   <i>(Screenshot placeholder)</i>
   <br/>
-  <b>Dark Aurora Glass Aesthetic</b> · <b>Multi-language Support</b> · <b>Actionable Insights</b>
+  <b>Premium Liquid Glass Aesthetic</b> · <b>Multi-language Support</b> · <b>Actionable Insights</b>
 </div>
 
 ---
@@ -32,7 +32,7 @@ Marketing departments often operate in silos separated from product quality and 
 ```text
 amazon-fine-review/
 ├── app.py                    # Main Streamlit dashboard UI
-├── config.py                 # "Aurora Borealis" color palette & Plotly theme
+├── config.py                 # "Premium Liquid Glass" color palette & Plotly theme
 ├── translations.py           # ES/EN/BR dictionary system
 ├── nlp_pipeline.py           # ETL, text cleaning, sentiment & topic modeling
 ├── marketing_data.py         # Simulated marketing data generator
@@ -88,4 +88,4 @@ amazon-fine-review/
 ---
 > **Methodological Note:** Because the Amazon Fine Food dataset does not contain marketing variables, the marketing investment and ROI data is simulated using Gaussian noise to enforce realistic correlations based on applied NLP academic literature in e-commerce contexts. 
 
-*Desarrollado por [Tu Nombre]*
+*Desarrollado por Hely Camargo*

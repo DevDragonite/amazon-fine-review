@@ -395,22 +395,12 @@ def main():
             # Heatmap / Top Keywords
             t1c3, t1c4 = st.columns(2)
             with t1c3:
-                # Bar Chart Horizontal Keywords - Dynamic Frequency
-                from collections import Counter
-                import re
-                
-                # Filter for negative reviews to extract keywords
-                neg_reviews = f_sent[f_sent['Sentiment_Class'] == 'Negative']['CleanText'].dropna()
-                all_words = " ".join(neg_reviews).split()
-                # Assuming stopwords already removed, let's just get top 10 frequencies
-                word_freq = Counter(all_words).most_common(10)
-                
-                if word_freq:
-                    df_freq = pd.DataFrame(word_freq, columns=['Keyword', 'Frequency'])
-                    df_freq = df_freq.sort_values(by='Frequency', ascending=True) # Sort for Plotly horizontal bar
-                    fig3 = px.bar(df_freq, x='Frequency', y='Keyword', orientation='h', 
+                # Bar Chart Horizontal Keywords - Usando DF preprocesado para evitar KeyError's de memoria
+                if df_neg_topics is not None and not df_neg_topics.empty:
+                    df_freq = df_neg_topics.sort_values(by='Count', ascending=True) # Sort for Plotly horizontal bar
+                    fig3 = px.bar(df_freq, x='Count', y='Topic', orientation='h', 
                                   color_discrete_sequence=[COLORS['negative']])
-                    fig3.update_layout(PLOTLY_TEMPLATE['layout'], title="Top 10 Keywords en Reseñas Negativas")
+                    fig3.update_layout(PLOTLY_TEMPLATE['layout'], title="Distribución de Quejas / Temas Negativos")
                     st.plotly_chart(fig3, use_container_width=True)
                 else:
                     st.info("Sin datos suficientes para extraer keywords.")
