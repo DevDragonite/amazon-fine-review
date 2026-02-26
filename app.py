@@ -261,7 +261,18 @@ def main():
     
     st.sidebar.title("🧠 " + t("app_title"))
     
-    nav_selection = st.sidebar.radio("", [t("nav_intro"), t("nav_dashboard")])
+    nav_options = ["intro", "dashboard"]
+    
+    # Bind the navigation to session state so it survives st.rerun() from the translation buttons
+    if 'nav_state' not in st.session_state:
+        st.session_state.nav_state = "intro"
+        
+    nav_selection = st.sidebar.radio(
+        "", 
+        nav_options, 
+        format_func=lambda x: t(f"nav_{x}"),
+        key="nav_state"
+    )
     
     st.sidebar.markdown("---")
     
@@ -278,7 +289,7 @@ def main():
     
     st.sidebar.markdown(f"<div style='margin-top: 50px; text-align: center; color: {COLORS['text_muted']}; font-weight: bold;'>{t('developed_by')}</div>", unsafe_allow_html=True)
     
-    if nav_selection == t("nav_intro"):
+    if nav_selection == "intro":
         st.markdown(f"""
 <div class="welcome-card" style="margin: 0; padding: 2.5rem;">
 <h1 style="font-size: 3.2rem; margin-bottom: 0.8rem; text-align: center; color: {COLORS['text_primary']}; font-family: 'Inter', sans-serif;">{t("app_title")}</h1>
@@ -307,7 +318,7 @@ def main():
 </div>
 """, unsafe_allow_html=True)
         
-    elif nav_selection == t("nav_dashboard"):
+    elif nav_selection == "dashboard":
         
         st.title(t("dashboard_title"))
         st.write("")
