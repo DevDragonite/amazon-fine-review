@@ -366,7 +366,6 @@ def main():
         
         # ---------- TAB 1: SENTIMENT ----------
         with tab1:
-            st.markdown("<div class='aurora-card'>", unsafe_allow_html=True)
             t1c1, t1c2 = st.columns(2)
             
             with t1c1:
@@ -417,11 +416,8 @@ def main():
                 fig4.update_layout(PLOTLY_TEMPLATE['layout'], title=t("chart4_title"))
                 st.plotly_chart(fig4, use_container_width=True)
                 
-            st.markdown("</div>", unsafe_allow_html=True)
-            
         # ---------- TAB 2: MARKETING ----------
         with tab2:
-            st.markdown("<div class='aurora-card'>", unsafe_allow_html=True)
             t2c1, t2c2 = st.columns(2)
             
             with t2c1:
@@ -446,12 +442,11 @@ def main():
             # Tabla de rendimiento
             perf_df = f_mkt.groupby('Canal').agg({'Inversion': 'sum', 'Revenue': 'sum', 'ROAS': 'mean', 'CAC': 'mean', 'CTR': 'mean'}).reset_index()
             st.dataframe(perf_df.style.background_gradient(cmap='Blues'), use_container_width=True)
-                
-            st.markdown("</div>", unsafe_allow_html=True)
+            
+            st.info(f"**{t('insight_label')}**: {t('tab2_insight')}")
             
         # ---------- TAB 3: CORRELATION ----------
         with tab3:
-            st.markdown("<div class='aurora-card'>", unsafe_allow_html=True)
             
             # Scatter Plot Principal
             sent_monthly = f_sent.groupby('Month')['Sentiment_Score'].mean().reset_index()
@@ -473,14 +468,12 @@ def main():
                 st.plotly_chart(fig8, use_container_width=True)
                 
                 st.markdown(f"<div class='aurora-card' style='text-align: center; border-color: {COLORS['primary']}'><h3 style='color: {COLORS['primary']}'>{t('insight3')}</h3></div>", unsafe_allow_html=True)
+                st.info(f"**{t('insight_label')}**: {t('tab3_insight')}")
             else:
                 st.warning(t("no_data_correlation"))
-                
-            st.markdown("</div>", unsafe_allow_html=True)
 
         # ---------- TAB 4: CONCLUSIONS ----------
         with tab4:
-            st.markdown("<div class='aurora-card'>", unsafe_allow_html=True)
             
             def create_insight(hallazgo, impacto, accion, prediccion):
                 st.markdown(f"""
@@ -538,8 +531,6 @@ def main():
                 </p>
             </div>
             """, unsafe_allow_html=True)
-            
-            st.markdown("</div>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
