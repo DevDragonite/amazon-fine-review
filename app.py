@@ -254,6 +254,10 @@ def load_datasets():
         st.error(f"Error loading data: {e}. Make sure to run Steps 1 and 2.")
         return None, None, None, None
 
+def _on_nav_change():
+    """Callback: sync the radio widget value back to our decoupled state variable."""
+    st.session_state.current_page = st.session_state._nav_radio_key
+
 def main():
     inject_custom_css()
     
@@ -263,15 +267,20 @@ def main():
     
     nav_options = ["intro", "dashboard"]
     
-    # Bind the navigation to session state so it survives st.rerun() from the translation buttons
-    if 'nav_state' not in st.session_state:
-        st.session_state.nav_state = "intro"
+    # Decoupled navigation state — NOT bound to the radio widget key.
+    # This survives st.rerun() because no widget overwrites it.
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = "intro"
+    
+    current_index = nav_options.index(st.session_state.current_page)
         
     nav_selection = st.sidebar.radio(
         "", 
         nav_options, 
+        index=current_index,
         format_func=lambda x: t(f"nav_{x}"),
-        key="nav_state"
+        key="_nav_radio_key",
+        on_change=_on_nav_change
     )
     
     st.sidebar.markdown("---")
