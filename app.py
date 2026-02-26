@@ -25,93 +25,159 @@ def t(key):
 def inject_custom_css():
     st.markdown(f"""
     <style>
-    /* FONDO GENERAL */
-    [data-testid="stAppViewContainer"] {{
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* App Background - elegant soft gradient */
+    .stApp, [data-testid="stAppViewContainer"] {{
         background: {COLORS['bg_gradient']};
+        font-family: 'Inter', sans-serif;
         background-attachment: fixed;
     }}
     
-    /* CARDS AURORA GLASS */
-    .aurora-card {{
-        background: {COLORS['surface']};
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        border: 1px solid {COLORS['border']};
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,255,0.05) inset;
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: all 0.3s ease;
-    }}
-    .aurora-card:hover {{
-        border-color: rgba(0, 212, 255, 0.4);
-    }}
-    
-    /* KPI METRICS */
-    [data-testid="stMetric"] {{
-        background: {COLORS['surface']};
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        border: 1px solid {COLORS['border']};
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,255,0.05) inset;
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: all 0.3s ease;
-    }}
-    [data-testid="stMetric"]:hover {{
-        border-color: rgba(0, 212, 255, 0.4);
-    }}
-    
-    div[data-testid="stMetricValue"] {{
-        color: {COLORS['text_primary']} !important;
-        font-weight: 700 !important;
-    }}
-    
-    /* TABS */
-    div[data-baseweb="tab-list"] {{
-        gap: 10px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }}
-    div[data-baseweb="tab"] {{
-        flex: 1;
-        text-align: center;
-        background: rgba(0, 212, 255, 0.08) !important;
-        border: 1px solid rgba(0, 212, 255, 0.2) !important;
-        border-radius: 8px !important;
-        padding: 10px 20px !important;
-        color: {COLORS['text_muted']} !important;
-        font-weight: 700 !important;
-        margin-bottom: 15px;
-        justify-content: center;
-    }}
-    div[data-baseweb="tab"]:hover {{
-        background: rgba(0, 212, 255, 0.15) !important;
-    }}
-    div[data-baseweb="tab"][aria-selected="true"] {{
-        background: rgba(0, 212, 255, 0.25) !important;
-        color: {COLORS['primary']} !important;
-        border-color: rgba(0, 212, 255, 0.6) !important;
-        box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-    }}
-    
-    /* TIPOGRAFÍA */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    /* Typography */
     html, body, [class*="css"] {{
+        color: {COLORS['text_primary']} !important; 
         font-family: 'Inter', sans-serif;
     }}
     h1, h2, h3, h4, h5, h6 {{
         color: {COLORS['text_primary']} !important;
-        font-weight: bold !important;
+        font-weight: 700;
+        letter-spacing: -0.02em;
     }}
-    p, span, div {{
+    
+    /* Liquid Glass Containers for Metrics and general containers */
+    [data-testid="stMetric"], .aurora-card, .css-1r6slb0, .css-12oz5g7 {{
+        background: {COLORS['surface']} !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07) !important;
+        padding: 1.5rem !important;
+        transition: all 0.3s ease;
+        box-sizing: border-box !important;
+    }}
+    
+    [data-testid="stPlotlyChart"] {{
+        background: {COLORS['surface']} !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07) !important;
+        padding: 0 !important; /* NO PADDING to avoid internal scrollbars */
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }}
+    
+    [data-testid="stPlotlyChart"] iframe {{
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }}
+    
+    [data-testid="stMetric"]:hover, .aurora-card:hover {{
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 1) !important;
+    }}
+    
+    /* Metric Typography */
+    [data-testid="stMetricValue"] {{
+        font-size: 2.0rem !important; 
+        font-weight: 800 !important;
+        background: -webkit-linear-gradient(45deg, {COLORS['primary']}, {COLORS['accent']});
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }}
+    [data-testid="stMetricLabel"] {{
+        font-size: 0.95rem !important;
+        color: {COLORS['text_muted']} !important;
+        font-weight: 600 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }}
+    
+    /* Tabs styling - Pill shape full width */
+    .stTabs [data-baseweb="tab-list"] {{
+        display: flex;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.4);
+        padding: 6px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        width: 100%;
+        justify-content: space-between;
+    }}
+    .stTabs [data-baseweb="tab"] {{
+        flex: 1; 
+        justify-content: center;
+        height: 42px;
+        background: rgba(226, 232, 240, 0.6); 
+        border-radius: 12px;
+        padding: 8px 12px;
+        font-weight: 800 !important; 
+        color: {COLORS['text_primary']} !important; 
+        border: 1px solid rgba(203, 213, 225, 0.5) !important;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }}
+    .stTabs [aria-selected="true"] {{
+        background: rgba(255, 255, 255, 1) !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06) !important;
+        color: {COLORS['primary']} !important;
+    }}
+    .stTabs [data-baseweb="tab-highlight"] {{
+        display: none;
+    }}
+    
+    /* Welcome Storytelling elements */
+    .welcome-card {{
+        background: {COLORS['surface']};
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 3.5rem;
+        border: 1px solid rgba(255, 255, 255, 1);
+        box-shadow: 0 15px 50px rgba(15, 23, 42, 0.06);
+        margin-bottom: 2rem;
+    }}
+    .welcome-pillar {{
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 1.8rem;
+        margin: 1.2rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+        border-left: 5px solid {COLORS['primary']};
+        transition: all 0.3s ease;
+    }}
+    .welcome-pillar * {{
+        color: {COLORS['text_primary']} !important;
+    }}
+    .welcome-pillar:hover {{
+        transform: translateX(8px);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    }}
+    .welcome-text {{
+        font-size: 1.15rem;
+        line-height: 1.8;
         color: {COLORS['text_muted']};
     }}
     
-    /* SIN SCROLLBARS EN GRÁFICOS */
-    [data-testid="stPlotlyChart"] {{
-        padding: 0 !important;
-        overflow: hidden !important;
+    .stButton>button {{
+        border-radius: 12px;
+        font-weight: 600;
+        border: 1px solid rgba(0,0,0,0.1);
+        background: white;
+        color: {COLORS['text_primary']};
+    }}
+    
+    hr {{
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        margin: 2.5rem 0;
     }}
     
     /* Hero Section */
