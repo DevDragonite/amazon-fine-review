@@ -194,27 +194,47 @@ def inject_custom_css():
 
 # ----------------- HEADER & LANGUAGE SELECTOR -----------------
 def render_language_selector():
-    st.markdown('<div style="display: flex; justify-content: flex-end; width:100%;">', unsafe_allow_html=True)
-    
-    # SVG Flags using HTML images
-    es_flag = '<img src="https://flagcdn.com/w20/ve.png" width="20" style="vertical-align:middle; margin-right:5px;">'
-    en_flag = '<img src="https://flagcdn.com/w20/us.png" width="20" style="vertical-align:middle; margin-right:5px;">'
-    br_flag = '<img src="https://flagcdn.com/w20/br.png" width="20" style="vertical-align:middle; margin-right:5px;">'
-    
-    label = f"{es_flag} ES" if st.session_state.lang == 'ES' else (f"{en_flag} EN" if st.session_state.lang == 'EN' else f"{br_flag} BR")
-    
-    with st.popover("🌐 Idioma / Language"):
-        if st.button("🇻🇪 Español (VE)"):
-            st.session_state.lang = 'ES'
-            st.rerun()
-        if st.button("🇺🇸 English (US)"):
-            st.session_state.lang = 'EN'
-            st.rerun()
-        if st.button("🇧🇷 Português (BR)"):
-            st.session_state.lang = 'BR'
-            st.rerun()
+    col_logo, col_space, col_lang = st.columns([1, 6, 1])
+    with col_lang:
+        flag_urls = {
+            "ES": "https://flagcdn.com/w20/ve.png",
+            "EN": "https://flagcdn.com/w20/us.png",
+            "BR": "https://flagcdn.com/w20/br.png"
+        }
+        
+        active_lang = st.session_state.lang
+        other_langs = [l for l in flag_urls.keys() if l != active_lang]
+        
+        # Iterate over the non-active languages and inject dynamic CSS for each specific position
+        inner_css = ""
+        for idx, lang_opt in enumerate(other_langs, start=1):
+            inner_css += f"""
+            div[data-testid="stPopoverBody"] div[data-testid="stElementContainer"]:nth-child({idx}) button p::before {{
+                content: ""; display: inline-block; width: 18px; height: 13px;
+                background-image: url('{flag_urls[lang_opt]}'); background-size: cover; 
+                margin-right: 8px; vertical-align: middle; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            }}
+            """
             
-    st.markdown('</div>', unsafe_allow_html=True)
+        # CSS injection for natively unsupported images in Streamlit buttons
+        css_flags = f"""
+        <style>
+        /* Main popover button flag */
+        div[data-testid="stPopover"] > div > button p::before {{
+            content: ""; display: inline-block; width: 18px; height: 13px;
+            background-image: url('{flag_urls[active_lang]}'); background-size: cover; 
+            margin-right: 8px; vertical-align: middle; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }}
+        {inner_css}
+        </style>
+        """
+        st.markdown(css_flags, unsafe_allow_html=True)
+        
+        with st.popover("🌐"):
+            for lang_option in other_langs:
+                if st.button(lang_option, use_container_width=True, key=f"btn_{lang_option}"):
+                    st.session_state.lang = lang_option
+                    st.rerun()
 
 # ----------------- DATA LOADING -----------------
 @st.cache_data
@@ -250,7 +270,6 @@ def main():
     if df_sent is None:
         return
         
-    # FILTERS IN SIDEBAR
     min_year = df_sent['Date'].dt.year.min()
     max_year = df_sent['Date'].dt.year.max()
     year_range = st.sidebar.slider(t("filter_year"), min_value=int(min_year), max_value=int(max_year), value=(int(min_year), int(max_year)))
@@ -260,38 +279,50 @@ def main():
     st.sidebar.markdown(f"<div style='margin-top: 50px; text-align: center; color: {COLORS['text_muted']}; font-weight: bold;'>{t('developed_by')}</div>", unsafe_allow_html=True)
     
     if nav_selection == t("nav_intro"):
-        st.markdown(f"<h1 class='hero-title'>{t('app_title')}</h1>", unsafe_allow_html=True)
         st.markdown(f"""
-        <div style="font-size: 1.2rem; color: {COLORS['text_primary']}; margin-bottom: 2rem;">
-            {t("intro_p1")}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.markdown(f"<div class='aurora-card'><h3>{t('intro_card1_title')}</h3><p>Análisis avanzado con VADER y Transformers para captar sutilezas.</p></div>", unsafe_allow_html=True)
-        with col2:
-            st.markdown(f"<div class='aurora-card'><h3>{t('intro_card2_title')}</h3><p>Atribución precisa a través de múltiples canales digitales.</p></div>", unsafe_allow_html=True)
-        with col3:
-            st.markdown(f"<div class='aurora-card'><h3>{t('intro_card3_title')}</h3><p>Modelos predictivos vinculando la voz del cliente con el ROI financiero.</p></div>", unsafe_allow_html=True)
-            
-        st.markdown(f"<div style='text-align: center; margin-top: 2rem; color: {COLORS['primary']}; font-weight: bold;'>{t('intro_p2')}</div>", unsafe_allow_html=True)
+<div class="welcome-card" style="margin: 0; padding: 2.5rem;">
+<h1 style="font-size: 3.2rem; margin-bottom: 0.8rem; text-align: center; color: {COLORS['text_primary']}; font-family: 'Inter', sans-serif;">{t["app_title"]}</h1>
+<p style="text-align: center; font-size: 1.3rem; color: {COLORS['text_muted']}; margin-bottom: 2.5rem; font-weight: 500; font-family: 'Inter', sans-serif;">
+<em>{t['intro_p1']}</em>
+</p>
+
+<div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
+<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t['intro_card1_title']}</h4>
+<p style="margin:0; color: {COLORS['text_muted']};">Análisis avanzado con VADER y TextBlob para captar sutilezas con precisión lingüística.</p>
+</div>
+<div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
+<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t['intro_card2_title']}</h4>
+<p style="margin:0; color: {COLORS['text_muted']};">Atribución precisa a través de múltiples canales digitales para maximizar la inversión.</p>
+</div>
+<div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
+<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t['intro_card3_title']}</h4>
+<p style="margin:0; color: {COLORS['text_muted']};">Modelos predictivos que vinculan la voz del cliente directamente con el ROI financiero.</p>
+</div>
+
+<div style="text-align: center; margin-top: 2rem; font-family: 'Inter', sans-serif;">
+<p style="font-weight: 600; font-size: 1.2rem; color: {COLORS['primary']};">
+{t['intro_p2']}
+</p>
+</div>
+</div>
+""", unsafe_allow_html=True)
         
     elif nav_selection == t("nav_dashboard"):
         
-        # MAIN UI FILTERS (Moved from Sidebar)
-        st.markdown("<div style='margin-bottom: 20px;'>", unsafe_allow_html=True)
-        filt_c1, filt_c2 = st.columns(2)
+        st.title("📊 Dashboard")
+        st.write("")
         
-        channels = df_mkt['Canal'].unique().tolist()
-        categories = df_sent['Category'].unique().tolist()
-        
-        with filt_c1:
-            selected_categories = st.multiselect(t("filter_category"), categories, default=categories)
-        with filt_c2:
-            selected_channels = st.multiselect(t("filter_channel"), channels, default=channels)
+        # MAIN UI FILTERS (Expander instead of straight columns)
+        with st.expander(f"🎛️ Filtros Globales", expanded=True):
+            filt_c1, filt_c2 = st.columns(2)
             
-        st.markdown("</div>", unsafe_allow_html=True)
+            channels = df_mkt['Canal'].unique().tolist()
+            categories = df_sent['Category'].unique().tolist()
+            
+            with filt_c1:
+                selected_categories = st.multiselect(t("filter_category"), categories, default=categories)
+            with filt_c2:
+                selected_channels = st.multiselect(t("filter_channel"), channels, default=channels)
         
         # APPLY FILTERS (Moved to Dashboard execution scope since variables live here now)
         f_sent = df_sent[
@@ -467,8 +498,8 @@ def main():
                     <h4 style="margin-top: 0; color: {COLORS['text_primary']}; font-size: 1.1rem;">🔍 {t('finding')}: {hallazgo}</h4>
                     <p style="margin: 0.8rem 0; font-size: 1rem;"><strong>💥 {t('impact')}:</strong> {impacto}</p>
                     <p style="margin: 0.8rem 0; font-size: 1rem;"><strong>✅ {t('action')}:</strong> {accion}</p>
-                    <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(0,212,255,0.1); border-radius: 6px;">
-                        <span style="color: {COLORS['secondary']}; font-weight: bold;">📈 {t('prediction')}:</span> 
+                    <div style="margin-top: 1rem; padding: 0.8rem; background: {COLORS['primary_soft']}; border-radius: 6px;">
+                        <span style="color: {COLORS['primary']}; font-weight: bold;">📈 {t('prediction')}:</span> 
                         <span style="color: {COLORS['text_primary']};">{prediccion}</span>
                     </div>
                 </div>
@@ -501,11 +532,19 @@ def main():
             
             st.markdown(f"<p style='margin-top: 2rem; font-style: italic; color: {COLORS['text_muted']}; font-size: 0.85rem;'>{t('methodology_note')}: {t('conclusions_intro')}</p>", unsafe_allow_html=True)
             
+            footer_labels = {
+                "ES": "Desarrollado por Hely Camargo utilizando:",
+                "EN": "Developed by Hely Camargo using:",
+                "BR": "Desenvolvido por Hely Camargo utilizando:"
+            }
+            f_text = footer_labels.get(st.session_state.lang, footer_labels["ES"])
+            techs = "Python, Streamlit, Plotly, Pandas, Scikit-Learn, NLTK, SpaCy"
+            
             st.markdown(f"""
-            <div style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid {COLORS['border']}; text-align: center;">
-                <p style="color: {COLORS['text_muted']}; font-size: 0.9rem;">
-                    Desarrollado por <strong>Hely Camargo</strong> utilizando: 
-                    <span style="color: {COLORS['primary']};">Python, Streamlit, Plotly, Pandas, Scikit-Learn, NLTK, SpaCy</span>
+            <div style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid {COLORS['border']}; text-align: right;">
+                <p style="color: {COLORS['text_primary']}; font-size: 0.9rem; font-weight: bold;">
+                    {f_text} 
+                    <span style="color: {COLORS['primary']};">{techs}</span>
                 </p>
             </div>
             """, unsafe_allow_html=True)
