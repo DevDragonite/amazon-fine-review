@@ -1,34 +1,34 @@
 COLORS = {
-    # Fondos
-    "bg_gradient": "linear-gradient(135deg, #0f1729 0%, #1a2744 50%, #0d2137 100%)",
-    "surface": "rgba(255, 255, 255, 0.06)",
-    "surface_hover": "rgba(255, 255, 255, 0.10)",
+    # Fondos (Teal a Slate muy claro para Light Mode)
+    "bg_gradient": "linear-gradient(135deg, #f0fdfa 0%, #f8fafc 100%)",
+    "surface": "rgba(255, 255, 255, 0.8)",
+    "surface_hover": "rgba(255, 255, 255, 0.95)",
 
-    # Acento principal — Cian Aurora
-    "primary": "#00d4ff",
-    "primary_soft": "rgba(0, 212, 255, 0.15)",
+    # Acento principal — Teal (Serenidad)
+    "primary": "#0d9488",
+    "primary_soft": "rgba(13, 148, 136, 0.15)",
 
-    # Acento secundario — Verde esmeralda
-    "secondary": "#00ffa3",
-    "secondary_soft": "rgba(0, 255, 163, 0.12)",
+    # Acento secundario — Slate
+    "secondary": "#475569",
+    "secondary_soft": "rgba(71, 85, 105, 0.12)",
 
-    # Acento terciario — Violeta
-    "accent": "#a855f7",
-    "accent_soft": "rgba(168, 85, 247, 0.15)",
+    # Acento terciario — Indigo pálido (para equilibrio)
+    "accent": "#6366f1",
+    "accent_soft": "rgba(99, 102, 241, 0.15)",
 
     # Semáforo analítico
-    "positive": "#00ffa3",
-    "neutral": "#f0b94a",
-    "negative": "#ff6b6b",
+    "positive": "#10b981", # Emerald
+    "neutral": "#f59e0b",  # Amber
+    "negative": "#ef4444", # Red
 
     # Texto
-    "text_primary": "#e8f4fd",
-    "text_muted": "#8aa4c8",
-    "text_accent": "#00d4ff",
+    "text_primary": "#0f172a", # Slate oscuro
+    "text_muted": "#64748b",
+    "text_accent": "#0d9488",
 
     # Bordes
-    "border": "rgba(0, 212, 255, 0.15)",
-    "border_strong": "rgba(0, 212, 255, 0.35)",
+    "border": "rgba(13, 148, 136, 0.2)",
+    "border_strong": "rgba(13, 148, 136, 0.4)",
 }
 
 PLOTLY_TEMPLATE = {
@@ -37,20 +37,20 @@ PLOTLY_TEMPLATE = {
         "plot_bgcolor": "rgba(0,0,0,0)",
         "font": {
             "family": "Inter",
-            "color": "#e8f4fd",
+            "color": "#0f172a",
             "size": 12
         },
         "colorway": [
-            "#00d4ff", "#00ffa3", "#a855f7",
-            "#f0b94a", "#ff6b6b", "#38bdf8", "#fb923c"
+            "#0d9488", "#475569", "#6366f1",
+            "#10b981", "#f59e0b", "#ef4444", "#38bdf8"
         ],
         "xaxis": {
-            "gridcolor": "rgba(255,255,255,0.05)",
-            "linecolor": "rgba(255,255,255,0.1)"
+            "gridcolor": "rgba(15, 23, 42, 0.05)",
+            "linecolor": "rgba(15, 23, 42, 0.1)"
         },
         "yaxis": {
-            "gridcolor": "rgba(255,255,255,0.05)",
-            "linecolor": "rgba(255,255,255,0.1)"
+            "gridcolor": "rgba(15, 23, 42, 0.05)",
+            "linecolor": "rgba(15, 23, 42, 0.1)"
         }
     }
 }
