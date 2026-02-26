@@ -309,7 +309,7 @@ def main():
         
     elif nav_selection == t("nav_dashboard"):
         
-        st.title("📊 Dashboard")
+        st.title(t("dashboard_title"))
         st.write("")
         
         # MAIN UI FILTERS
