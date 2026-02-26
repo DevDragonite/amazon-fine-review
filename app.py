@@ -281,27 +281,27 @@ def main():
     if nav_selection == t("nav_intro"):
         st.markdown(f"""
 <div class="welcome-card" style="margin: 0; padding: 2.5rem;">
-<h1 style="font-size: 3.2rem; margin-bottom: 0.8rem; text-align: center; color: {COLORS['text_primary']}; font-family: 'Inter', sans-serif;">{t["app_title"]}</h1>
+<h1 style="font-size: 3.2rem; margin-bottom: 0.8rem; text-align: center; color: {COLORS['text_primary']}; font-family: 'Inter', sans-serif;">{t("app_title")}</h1>
 <p style="text-align: center; font-size: 1.3rem; color: {COLORS['text_muted']}; margin-bottom: 2.5rem; font-weight: 500; font-family: 'Inter', sans-serif;">
-<em>{t['intro_p1']}</em>
+<em>{t("intro_p1")}</em>
 </p>
 
 <div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
-<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t['intro_card1_title']}</h4>
+<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t("intro_card1_title")}</h4>
 <p style="margin:0; color: {COLORS['text_muted']};">Análisis avanzado con VADER y TextBlob para captar sutilezas con precisión lingüística.</p>
 </div>
 <div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
-<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t['intro_card2_title']}</h4>
+<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t("intro_card2_title")}</h4>
 <p style="margin:0; color: {COLORS['text_muted']};">Atribución precisa a través de múltiples canales digitales para maximizar la inversión.</p>
 </div>
 <div class="welcome-pillar" style="font-family: 'Inter', sans-serif;">
-<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t['intro_card3_title']}</h4>
+<h4 style="margin-bottom: 0.5rem; color: {COLORS['text_primary']};">{t("intro_card3_title")}</h4>
 <p style="margin:0; color: {COLORS['text_muted']};">Modelos predictivos que vinculan la voz del cliente directamente con el ROI financiero.</p>
 </div>
 
 <div style="text-align: center; margin-top: 2rem; font-family: 'Inter', sans-serif;">
 <p style="font-weight: 600; font-size: 1.2rem; color: {COLORS['primary']};">
-{t['intro_p2']}
+{t("intro_p2")}
 </p>
 </div>
 </div>
