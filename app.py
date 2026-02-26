@@ -312,17 +312,17 @@ def main():
         st.title("📊 Dashboard")
         st.write("")
         
-        # MAIN UI FILTERS (Expander instead of straight columns)
-        with st.expander(f"🎛️ Filtros Globales", expanded=True):
-            filt_c1, filt_c2 = st.columns(2)
-            
-            channels = df_mkt['Canal'].unique().tolist()
-            categories = df_sent['Category'].unique().tolist()
-            
-            with filt_c1:
-                selected_categories = st.multiselect(t("filter_category"), categories, default=categories)
-            with filt_c2:
-                selected_channels = st.multiselect(t("filter_channel"), channels, default=channels)
+        # MAIN UI FILTERS
+        st.markdown(f"<h4 style='color: {COLORS['text_primary']}; margin-bottom: 1rem;'>🎛️ Filtros Globales</h4>", unsafe_allow_html=True)
+        filt_c1, filt_c2 = st.columns(2)
+        
+        channels = df_mkt['Canal'].unique().tolist()
+        categories = df_sent['Category'].unique().tolist()
+        
+        with filt_c1:
+            selected_categories = st.multiselect(t("filter_category"), categories, default=categories)
+        with filt_c2:
+            selected_channels = st.multiselect(t("filter_channel"), channels, default=channels)
         
         # APPLY FILTERS (Moved to Dashboard execution scope since variables live here now)
         f_sent = df_sent[
