@@ -10,7 +10,7 @@
 **Sentiment & Marketing Intelligence Center** is an analytical dashboard designed to bridge the gap between unstructured customer feedback and financial marketing performance. It goes beyond simple sentiment tracking by computationally correlating changes in public perception with next-month marketing Returns on Ad Spend (ROAS).
 
 <div align="center">
-  <i>(Screenshot placeholder)</i>
+  <i></i>
   <br/>
   <b>Premium Liquid Glass Aesthetic</b> · <b>Multi-language Support</b> · <b>Actionable Insights</b>
 </div>
