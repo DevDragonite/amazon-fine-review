@@ -64,7 +64,9 @@ TEXTS = {
         "c4_finding": "Email Marketing tiene el CAC más bajo pero el menor volumen de inversión",
         "c4_impact": "Canal de retención subutilizado con mayor rentabilidad",
         "c4_action": "Incrementar frecuencia y presupuesto de Email Marketing al 30%",
-        "c4_prediction": "+18% en conversiones totales impulsadas por recompra"
+        "c4_prediction": "+18% en conversiones totales impulsadas por recompra",
+        "tab2_insight": "El análisis holístico de Inversión, CAC y ROAS revela la eficiencia real de nuestro presupuesto publicitario. Al cruzar estos datos, podemos identificar rápidamente canales saturados y reasignar fondos hacia aquellos con mayor margen neto de retorno, optimizando la rentabilidad global.",
+        "tab3_insight": "Esta métrica es vital: comprueba matemáticamente que la satisfacción no es sólo una métrica de vanidad, sino un indicador predictivo de ventas futuras. Monitorear el sentimiento como KPI adelantado permite sacar conclusiones anticipadas sobre el rendimiento financiero del próximo trimestre."
     },
     "EN": {
         "app_title": "Sentiment Intelligence Center",
@@ -131,7 +133,9 @@ TEXTS = {
         "c4_finding": "Email Marketing has the lowest CAC but the lowest investment volume",
         "c4_impact": "Underutilized retention channel with higher profitability",
         "c4_action": "Increase frequency and budget of Email Marketing to 30%",
-        "c4_prediction": "+18% in total conversions driven by repurchases"
+        "c4_prediction": "+18% in total conversions driven by repurchases",
+        "tab2_insight": "Holistic analysis of Investment, CAC, and ROAS reveals the true efficiency of our advertising budget. By cross-referencing this data, we can quickly identify saturated channels and reallocate funds to those with higher net return margins, optimizing overall profitability.",
+        "tab3_insight": "This metric is vital: it mathematically proves that satisfaction is not just a vanity metric, but a predictive indicator of future sales. Monitoring sentiment as a leading KPI allows us to draw early conclusions about the financial performance of the upcoming quarter."
     },
     "BR": {
         "app_title": "Centro de Inteligência de Sentimentos",
@@ -198,6 +202,8 @@ TEXTS = {
         "c4_finding": "O Email Marketing tem o menor CAC, mas o menor volume de investimento",
         "c4_impact": "Canal de retenção subutilizado com maior rentabilidade",
         "c4_action": "Aumentar a frequência e o orçamento do Email Marketing para 30%",
-        "c4_prediction": "+18% em conversões totais impulsionadas por recompras"
+        "c4_prediction": "+18% em conversões totais impulsionadas por recompras",
+        "tab2_insight": "A análise holística de Investimento, CAC e ROAS revela a verdadeira eficiência do nosso orçamento publicitário. Ao cruzar esses dados, podemos identificar rapidamente canais saturados e realocar fundos para aqueles com maior margem de retorno líquido, otimizando a rentabilidade global.",
+        "tab3_insight": "Esta métrica é vital: prova matematicamente que a satisfação não é apenas uma métrica de vaidade, mas um indicador preditivo de vendas futuras. Monitorar o sentimento como um KPI antecedente nos permite tirar conclusões antecipadas sobre o desempenho financeiro do próximo trimestre."
     }
 }

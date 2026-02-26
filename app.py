@@ -1,10 +1,10 @@
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from config import COLORS, PLOTLY_TEMPLATE
-from translations import TEXTS
-import statsmodels.api as sm
+import streamlit as st # type: ignore
+import pandas as pd # type: ignore
+import plotly.express as px # type: ignore
+import plotly.graph_objects as go # type: ignore
+from config import COLORS, PLOTLY_TEMPLATE # type: ignore
+from translations import TEXTS # type: ignore
+import statsmodels.api as sm # type: ignore
 import base64
 
 st.set_page_config(
@@ -316,8 +316,8 @@ def main():
         st.markdown(f"<h4 style='color: {COLORS['text_primary']}; margin-bottom: 1rem;'>🎛️ Filtros Globales</h4>", unsafe_allow_html=True)
         filt_c1, filt_c2 = st.columns(2)
         
-        channels = df_mkt['Canal'].unique().tolist()
-        categories = df_sent['Category'].unique().tolist()
+        channels = df_mkt['Canal'].unique().tolist() # type: ignore
+        categories = df_sent['Category'].unique().tolist() # type: ignore
         
         with filt_c1:
             selected_categories = st.multiselect(t("filter_category"), categories, default=categories)
@@ -325,7 +325,7 @@ def main():
             selected_channels = st.multiselect(t("filter_channel"), channels, default=channels)
         
         # APPLY FILTERS (Moved to Dashboard execution scope since variables live here now)
-        f_sent = df_sent[
+        f_sent = df_sent[ # type: ignore
             (df_sent['Date'].dt.year >= year_range[0]) &
             (df_sent['Date'].dt.year <= year_range[1]) &
             (df_sent['Category'].isin(selected_categories)) &
@@ -333,7 +333,7 @@ def main():
             (df_sent['Sentiment_Score'] <= sentiment_range[1])
         ]
         
-        f_mkt = df_mkt[
+        f_mkt = df_mkt[ # type: ignore
             (df_mkt['Month'].dt.year >= year_range[0]) &
             (df_mkt['Month'].dt.year <= year_range[1]) &
             (df_mkt['Canal'].isin(selected_channels))
